@@ -33,3 +33,13 @@ def get_repositories_by_year(year, per_page=100, pages=10):
         time.sleep(5)
 
     return repositories
+
+years = range(2019, 2024)
+repo_data = []
+for year in years:
+    repo_data.extend(get_repositories_by_year(year))
+
+
+df = pd.DataFrame(repo_data, columns=["id", "name", "language", "stargazers_count", "created_at"])
+df.to_csv("github_repositories.csv", index=False)
+print("Dados coletados e salvos em github_repositories.csv")
